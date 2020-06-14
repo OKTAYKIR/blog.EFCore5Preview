@@ -9,7 +9,7 @@ namespace EFCore5Preview1
 {
     class Program
     {
-        static void Main(string[] args)
+        public static void EFCore5Preview1()
         {
             using var dbContext = new SampleDbContext();
 
@@ -46,7 +46,28 @@ namespace EFCore5Preview1
             Console.WriteLine(count);
 
             var blogs = dbContext.Users.Where(e => e.Blog.Contains((byte)234)).ToList();
+        }
 
+        public static void EFCore5Preview2()
+        {
+            using var dbContext = new SampleDbContext();
+
+            var user = new Blog()
+            {
+
+            };
+            user.SetTitle("title1");
+
+            dbContext.Add(user);
+
+            dbContext.SaveChanges();
+
+            var blogs = dbContext.Blogs.ToList();
+        }
+
+        static void Main(string[] args)
+        {
+            EFCore5Preview2();
         }
     }
 }
