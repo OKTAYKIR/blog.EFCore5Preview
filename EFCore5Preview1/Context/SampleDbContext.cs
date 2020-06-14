@@ -12,6 +12,8 @@ namespace EFCore5Preview1.Context
 
         public virtual DbSet<KeylessEntity> KeylessEntities { get; set; }
 
+        public virtual DbSet<Blog> Blogs { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.LogTo(Console.WriteLine);
@@ -77,6 +79,17 @@ namespace EFCore5Preview1.Context
                     .WithMany(o => o.Addresses)
                     .HasForeignKey(fk => fk.UserId);
             });
+
+            modelBuilder.Entity<Blog>(entity =>
+            {
+                entity
+                  .HasKey(pk => pk.Id);
+
+                entity
+                   .Property(p => p.Title)
+                   .HasMaxLength(40);
+            });
+
         }
     }
 }
