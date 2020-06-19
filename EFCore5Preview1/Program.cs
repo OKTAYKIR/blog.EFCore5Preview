@@ -65,9 +65,63 @@ namespace EFCore5Preview1
             var blogs = dbContext.Blogs.ToList();
         }
 
+        public static void EFCore5Preview3()
+        {
+            using var dbContext = new SampleDbContext();
+
+            var user = new User()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Oktay Kır",
+                Blog = new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+                CreateDate = DateTime.UtcNow,
+                Addresses = new List<Address>
+                {
+                    new Address
+                    {
+                        Id = Guid.NewGuid(),
+                        City = "Izmir",
+                        Zip = 34325,
+                        Street = "StreetIzmir"
+                    },
+                    new Address
+                    {
+                        Id = Guid.NewGuid(),
+                        City = "İstanbul",
+                        Zip = 34326,
+                        Street = "StreetIstanbul"
+                    },
+                    new Address
+                    {
+                        Id = Guid.NewGuid(),
+                        City = "Ankara",
+                        Zip = 34327,
+                        Street = "StreetAnkara"
+                    }
+                }
+            };
+
+            dbContext.Add(user);
+
+            dbContext.SaveChanges();
+
+            var query1 = dbContext
+                .Users
+                .Include(e => e.Addresses.Where(p => p.City.Contains("i")));
+
+            Console.WriteLine(query1.ToQueryString());
+
+            var query2 = dbContext.Users
+                .Include(e => e.Addresses.OrderByDescending(post => post.City).Take(5));
+
+            var count = dbContext.Users.Count(c => 5 > EF.Functions.DataLength(c.Name));
+
+            Console.WriteLine(query2.ToQueryString());
+        }
+
         static void Main(string[] args)
         {
-            EFCore5Preview2();
+            EFCore5Preview3();
         }
     }
 }

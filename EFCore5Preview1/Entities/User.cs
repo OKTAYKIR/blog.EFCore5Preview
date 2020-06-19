@@ -10,5 +10,6 @@ namespace EFCore5Preview1.Entities
         public byte[] Blog { get; set; }
         public DateTime CreateDate { get; set; }
         public virtual ICollection<Address> Addresses { get; set; }
+        public virtual ICollection<Blog> BlogList { get; set; }
     }
 }
