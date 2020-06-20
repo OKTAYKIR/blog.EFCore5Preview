@@ -43,6 +43,10 @@ namespace EFCore5Preview1.Context
                     .HasMany(o => o.Addresses)
                     .WithOne(m => m.User)
                     .HasForeignKey(fk => fk.Id);
+
+                entity
+                    .Property(b => b.Price)
+                    .HasPrecision(16, 4);
             });
 
 
