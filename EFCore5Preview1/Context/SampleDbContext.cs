@@ -6,6 +6,14 @@ namespace EFCore5Preview1.Context
 {
     public class SampleDbContext : DbContext
     {
+        public SampleDbContext()
+        {
+        }
+
+        public SampleDbContext(string[] args)
+        {
+        }
+
         public virtual DbSet<User> Users{ get; set; }
 
         public virtual DbSet<Address> Addresses { get; set; }
@@ -30,6 +38,8 @@ namespace EFCore5Preview1.Context
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.UseCollation("Turkish_CI_AS");
+
             modelBuilder.Entity<User>(entity =>
             {
                 entity
@@ -37,6 +47,7 @@ namespace EFCore5Preview1.Context
 
                 entity
                     .Property(p => p.Name)
+                    .UseCollation("Turkish_CI_AS")
                     .HasMaxLength(60);
 
                 entity
@@ -47,9 +58,15 @@ namespace EFCore5Preview1.Context
                 entity
                     .Property(b => b.Price)
                     .HasPrecision(16, 4);
+
+                entity
+                    .Property(b => b.UpdatedDate)
+                    .HasComputedColumnSql("GetUtcDate()", stored: false);
+
+                entity
+                  .Property(b => b.Computed)
+                  .HasComputedColumnSql("Price*10", stored: true);
             });
-
-
 
             modelBuilder.Entity<KeylessEntity>(entity =>
             {
@@ -93,7 +110,6 @@ namespace EFCore5Preview1.Context
                    .Property(p => p.Title)
                    .HasMaxLength(40);
             });
-
         }
     }
 }

@@ -10,14 +10,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFCore5Preview1.Context
 {
     [DbContext(typeof(SampleDbContext))]
-    [Migration("20200619110600_InitialCreate")]
+    [Migration("20200626142501_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "5.0.0-preview.3.20181.2")
+                .HasAnnotation("ProductVersion", "5.0.0-preview.5.20278.2")
+                .HasAnnotation("Relational:Collation", "Turkish_CI_AS")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -90,12 +91,27 @@ namespace EFCore5Preview1.Context
                     b.Property<byte[]>("Blog")
                         .HasColumnType("varbinary(max)");
 
+                    b.Property<decimal>("Computed")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("decimal(18,2)")
+                        .HasComputedColumnSql("Price*10", true);
+
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(60)")
+                        .UseCollation("Turkish_CI_AS")
                         .HasMaxLength(60);
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(16,4)")
+                        .HasPrecision(16, 4);
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime2")
+                        .HasComputedColumnSql("GetUtcDate()", false);
 
                     b.HasKey("Id");
 

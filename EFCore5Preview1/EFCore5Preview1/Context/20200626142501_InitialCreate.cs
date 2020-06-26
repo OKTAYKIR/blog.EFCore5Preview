@@ -22,9 +22,12 @@ namespace EFCore5Preview1.Context
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: true, collation: "Turkish_CI_AS"),
                     Blog = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Price = table.Column<decimal>(type: "decimal(16,4)", precision: 16, scale: 4, nullable: false),
+                    Computed = table.Column<decimal>(type: "decimal(18,2)", nullable: false, computedColumnSql: "Price*10", computedColumnIsStored: true),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false, computedColumnSql: "GetUtcDate()", computedColumnIsStored: false)
                 },
                 constraints: table =>
                 {
