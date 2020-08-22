@@ -29,7 +29,7 @@ namespace EFCore5Preview1.Context
             //optionsBuilder.LogTo(Console.WriteLine, new[] { CoreEventId.ContextInitialized, RelationalEventId.CommandExecuted });
             //optionsBuilder.LogTo(Console.WriteLine, new[] { DbLoggerCategory.Database.Name }, LogLevel.Information);
             //optionsBuilder.LogTo(Console.WriteLine, (id, level) => id == RelationalEventId.CommandExecuting);
-            optionsBuilder.UseSqlServer("Server=127.0.0.1;Initial Catalog=master;User=sa;Password=Pass@word;");
+            optionsBuilder.UseSqlServer("Server=127.0.0.1;Initial Catalog=master;User=sa;Password=Pass@word;MultipleActiveResultSets=true");
             
             base.OnConfiguring(optionsBuilder);
         }
