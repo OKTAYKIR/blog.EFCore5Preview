@@ -175,9 +175,76 @@ namespace EFCore5Preview1
             var computedColumnValue = addresses[0].User.Computed;
         }
 
+        public static void EFCore5Preview6()
+        {
+            using var dbContext = new SampleDbContext();
+
+            #region İlişkili Koleksiyonlar İçin Bölünmüş Sorgular
+            var user = new User()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Oktay Kır",
+                Blog = new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+                Price = 12,
+                CreateDate = DateTime.UtcNow
+            };
+
+            var address1 = new Address
+            {
+                Id = Guid.NewGuid(),
+                City = "İstanbul",
+                Zip = 34325,
+                Street = "StreetIstanbul",
+                UserId = user.Id
+            };
+
+            var address2 = new Address
+            {
+                Id = Guid.NewGuid(),
+                City = "İstanbul",
+                Zip = 34325,
+                Street = "StreetIstanbul",
+                UserId = user.Id
+            };
+
+            dbContext.Add(user);
+            dbContext.Add(address1);
+            dbContext.Add(address2);
+
+            dbContext.SaveChanges();
+
+            var query = dbContext
+                .Users
+                .Include(u => u.Addresses)
+                .ToList();
+
+
+            var query2 = dbContext
+                .Users
+                .AsSplitQuery()
+                .Include(u => u.Addresses)
+                .ToList();
+
+            #endregion
+
+            #region String Üzerinde FirstOrDefault Çevirimi
+            var query3 = dbContext.Users.Where(u => u.Name.FirstOrDefault() == 'O');
+
+            Console.WriteLine(query3.ToQueryString());
+            #endregion
+
+            #region Case Blokların Basitleşmesi
+            var query4 = dbContext.Users
+                .OrderBy(w => w.Name.CompareTo("Marcus' Lancer") == 0)
+                .ThenBy(w => w.Id);
+
+            Console.WriteLine(query4.ToQueryString());
+            #endregion
+        }
+
         static void Main(string[] args)
         {
-            EFCore5Preview5();
+            EFCore5Preview6();
         }
     }
 }
