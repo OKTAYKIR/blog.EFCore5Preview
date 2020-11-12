@@ -1,6 +1,8 @@
 # Entity Framework Core 5 - Samples
 EF Core 5 Samples include docker-compose file
 
+[Medium blog](https://medium.com/@Oktaykir)
+
 ## 📦 Stack
 * .Net Core 3.1
 * [EF Core 5](https://docs.microsoft.com/en-us/ef/core/)
