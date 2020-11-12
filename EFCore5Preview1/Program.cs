@@ -1,6 +1,8 @@
 ﻿using EFCore5Preview1.Context;
 using EFCore5Preview1.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -119,61 +121,61 @@ namespace EFCore5Preview1
             Console.WriteLine(query2.ToQueryString());
         }
 
-        public static void EFCore5Preview5()
-        {
-            using var dbContext = new SampleDbContext();
+        //public static void EFCore5Preview5()
+        //{
+        //    using var dbContext = new SampleDbContext();
 
-            var user = new User()
-            {
-                Id = Guid.NewGuid(),
-                Name = "Oktay Kır",
-                Blog = new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
-                Price = 12,
-                CreateDate = DateTime.UtcNow
-            };
+        //    var user = new User()
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        Name = "Oktay Kır",
+        //        Blog = new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+        //        Price = 12,
+        //        CreateDate = DateTime.UtcNow
+        //    };
 
-            var address1 = new Address
-            {
-                    Id = Guid.NewGuid(),
-                    City = "İstanbul",
-                    Zip = 34325,
-                    Street = "StreetIstanbul",
-                    UserId = user.Id
-            };
+        //    var address1 = new Address
+        //    {
+        //            Id = Guid.NewGuid(),
+        //            City = "İstanbul",
+        //            Zip = 34325,
+        //            Street = "StreetIstanbul",
+        //            UserId = user.Id
+        //    };
 
-            var address2 = new Address
-            {
-                Id = Guid.NewGuid(),
-                City = "İstanbul",
-                Zip = 34325,
-                Street = "StreetIstanbul",
-                UserId = user.Id
-            };
+        //    var address2 = new Address
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        City = "İstanbul",
+        //        Zip = 34325,
+        //        Street = "StreetIstanbul",
+        //        UserId = user.Id
+        //    };
 
-            dbContext.Add(user);
-            dbContext.Add(address1);
-            dbContext.Add(address2);
+        //    dbContext.Add(user);
+        //    dbContext.Add(address1);
+        //    dbContext.Add(address2);
 
-            dbContext.SaveChanges();
+        //    dbContext.SaveChanges();
 
-            //var getUsersQuery = dbContext
-            //    .Users
-            //    .Where(e => EF.Functions.Collate(e.Name, "Turkish_CI_AS") == "Oktay Kır");
+        //    //var getUsersQuery = dbContext
+        //    //    .Users
+        //    //    .Where(e => EF.Functions.Collate(e.Name, "Turkish_CI_AS") == "Oktay Kır");
 
-            //Console.WriteLine(getUsersQuery.ToQueryString());
+        //    //Console.WriteLine(getUsersQuery.ToQueryString());
 
-            var addresses = dbContext
-                .Addresses
-                .AsNoTracking()
-                .PerformIdentityResolution()
-                .Include(e => e.User)
-                .ToList();
+        //    var addresses = dbContext
+        //        .Addresses
+        //        .AsNoTracking()
+        //        .PerformIdentityResolution()
+        //        .Include(e => e.User)
+        //        .ToList();
 
-            addresses[0].User.Name = "modified";
+        //    addresses[0].User.Name = "modified";
 
-            var computedUpdatedDateValue = addresses[0].User.UpdatedDate;
-            var computedColumnValue = addresses[0].User.Computed;
-        }
+        //    var computedUpdatedDateValue = addresses[0].User.UpdatedDate;
+        //    var computedColumnValue = addresses[0].User.Computed;
+        //}
 
         public static void EFCore5Preview6()
         {
@@ -242,9 +244,33 @@ namespace EFCore5Preview1
             #endregion
         }
 
+        public static void EFCore5Preview7()
+        {
+            IServiceCollection services = new ServiceCollection();
+
+            services.AddDbContextFactory<SampleDbContext>(b => b.UseSqlServer(@"Server=127.0.0.1;Initial Catalog=master;User=sa;Password=Pass@word;MultipleActiveResultSets=true"));
+
+            var serviceProvider = services.BuildServiceProvider();
+
+            var _dbContextFactory = serviceProvider.GetService<IDbContextFactory<SampleDbContext>>();
+
+            using (var context = _dbContextFactory.CreateDbContext())
+            {
+                context.Database.CreateSavepoint("LastSavePoint");
+
+                context.Database.RollbackToSavepoint("LastSavePoint");
+
+                context.ChangeTracker.Clear();
+            }
+
+            #region DBContextFactory
+
+            #endregion
+        }
+
         static void Main(string[] args)
         {
-            EFCore5Preview6();
+            EFCore5Preview7();
         }
     }
 }
