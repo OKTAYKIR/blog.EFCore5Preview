@@ -8,6 +8,44 @@ namespace EFCore5Preview1.Context
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Animals",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Species = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Animals", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Blogs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Blogs", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Cats",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false),
+                    EdcuationLevel = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cats", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "KeylessEntities",
                 columns: table => new
                 {
@@ -18,6 +56,18 @@ namespace EFCore5Preview1.Context
                 });
 
             migrationBuilder.CreateTable(
+                name: "Pets",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Pets", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -25,9 +75,9 @@ namespace EFCore5Preview1.Context
                     Name = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: true, collation: "Turkish_CI_AS"),
                     Blog = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     Price = table.Column<decimal>(type: "decimal(16,4)", precision: 16, scale: 4, nullable: false),
-                    Computed = table.Column<decimal>(type: "decimal(18,2)", nullable: false, computedColumnSql: "Price*10", computedColumnIsStored: true),
+                    Computed = table.Column<decimal>(type: "decimal(18,2)", nullable: false, computedColumnSql: "Price*10", stored: true),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false, computedColumnSql: "GetUtcDate()", computedColumnIsStored: false)
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false, computedColumnSql: "GetUtcDate()", stored: false)
                 },
                 constraints: table =>
                 {
@@ -55,34 +105,9 @@ namespace EFCore5Preview1.Context
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Blogs",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Blogs", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Blogs_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_Addresses_UserId",
                 table: "Addresses",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Blogs_UserId",
-                table: "Blogs",
                 column: "UserId");
         }
 
@@ -92,10 +117,19 @@ namespace EFCore5Preview1.Context
                 name: "Addresses");
 
             migrationBuilder.DropTable(
+                name: "Animals");
+
+            migrationBuilder.DropTable(
                 name: "Blogs");
 
             migrationBuilder.DropTable(
+                name: "Cats");
+
+            migrationBuilder.DropTable(
                 name: "KeylessEntities");
+
+            migrationBuilder.DropTable(
+                name: "Pets");
 
             migrationBuilder.DropTable(
                 name: "Users");

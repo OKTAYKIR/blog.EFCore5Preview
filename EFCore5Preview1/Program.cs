@@ -262,10 +262,6 @@ namespace EFCore5Preview1
 
                 context.ChangeTracker.Clear();
             }
-
-            #region DBContextFactory
-
-            #endregion
         }
 
         static void Main(string[] args)

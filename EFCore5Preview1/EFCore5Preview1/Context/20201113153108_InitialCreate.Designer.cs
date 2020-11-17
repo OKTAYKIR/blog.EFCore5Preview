@@ -10,17 +10,17 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFCore5Preview1.Context
 {
     [DbContext(typeof(SampleDbContext))]
-    [Migration("20200821150327_InitialCreate")]
+    [Migration("20201113153108_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "5.0.0-preview.6.20312.4")
+                .UseIdentityColumns()
                 .HasAnnotation("Relational:Collation", "Turkish_CI_AS")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "5.0.0-preview.8.20407.4");
 
             modelBuilder.Entity("EFCore5Preview1.Entities.Address", b =>
                 {
@@ -30,20 +30,20 @@ namespace EFCore5Preview1.Context
 
                     b.Property<string>("City")
                         .IsRequired()
-                        .HasColumnType("nvarchar(40)")
-                        .HasMaxLength(40);
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
 
                     b.Property<string>("Street")
                         .IsRequired()
-                        .HasColumnType("nvarchar(40)")
-                        .HasMaxLength(40);
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Zip")
-                        .HasColumnType("int")
-                        .HasMaxLength(40);
+                        .HasMaxLength(40)
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -52,23 +52,33 @@ namespace EFCore5Preview1.Context
                     b.ToTable("Addresses");
                 });
 
+            modelBuilder.Entity("EFCore5Preview1.Entities.Animal", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Species")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Animals");
+                });
+
             modelBuilder.Entity("EFCore5Preview1.Entities.Blog", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("Title")
-                        .HasColumnType("nvarchar(40)")
-                        .HasMaxLength(40);
-
-                    b.Property<Guid?>("UserId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Blogs");
                 });
@@ -76,8 +86,8 @@ namespace EFCore5Preview1.Context
             modelBuilder.Entity("EFCore5Preview1.Entities.KeylessEntity", b =>
                 {
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(60)")
-                        .HasMaxLength(60);
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
 
                     b.ToTable("KeylessEntities");
                 });
@@ -100,13 +110,13 @@ namespace EFCore5Preview1.Context
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
+                        .HasMaxLength(60)
                         .HasColumnType("nvarchar(60)")
-                        .UseCollation("Turkish_CI_AS")
-                        .HasMaxLength(60);
+                        .UseCollation("Turkish_CI_AS");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(16,4)")
-                        .HasPrecision(16, 4);
+                        .HasPrecision(16, 4)
+                        .HasColumnType("decimal(16,4)");
 
                     b.Property<DateTime>("UpdatedDate")
                         .ValueGeneratedOnAddOrUpdate()
@@ -118,6 +128,26 @@ namespace EFCore5Preview1.Context
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("EFCore5Preview1.Entities.Pet", b =>
+                {
+                    b.HasBaseType("EFCore5Preview1.Entities.Animal");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.ToTable("Pets");
+                });
+
+            modelBuilder.Entity("EFCore5Preview1.Entities.Cat", b =>
+                {
+                    b.HasBaseType("EFCore5Preview1.Entities.Pet");
+
+                    b.Property<string>("EdcuationLevel")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.ToTable("Cats");
+                });
+
             modelBuilder.Entity("EFCore5Preview1.Entities.Address", b =>
                 {
                     b.HasOne("EFCore5Preview1.Entities.User", "User")
@@ -125,13 +155,6 @@ namespace EFCore5Preview1.Context
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("EFCore5Preview1.Entities.Blog", b =>
-                {
-                    b.HasOne("EFCore5Preview1.Entities.User", null)
-                        .WithMany("BlogList")
-                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }

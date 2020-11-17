@@ -29,7 +29,8 @@ namespace EFCore5Preview1.Context
             //optionsBuilder.LogTo(Console.WriteLine, new[] { CoreEventId.ContextInitialized, RelationalEventId.CommandExecuted });
             //optionsBuilder.LogTo(Console.WriteLine, new[] { DbLoggerCategory.Database.Name }, LogLevel.Information);
             //optionsBuilder.LogTo(Console.WriteLine, (id, level) => id == RelationalEventId.CommandExecuting);
-            optionsBuilder.UseSqlServer("Server=127.0.0.1;Initial Catalog=master;User=sa;Password=Pass@word;MultipleActiveResultSets=true");
+            optionsBuilder.UseSqlServer("Server=127.0.0.1;Initial Catalog=master;User=sa;Password=Pass@word;MultipleActiveResultSets=true",
+                 b => b.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery));
             
             base.OnConfiguring(optionsBuilder);
         }
@@ -110,6 +111,23 @@ namespace EFCore5Preview1.Context
                    .Property(p => p.Title)
                    .HasMaxLength(40);
             });
+
+            //modelBuilder.Entity<Animal>(entity =>
+            //{
+            //    entity.HasKey(pk => pk.Id);
+            //});
+
+            //modelBuilder.Entity<Pet>(entity =>
+            //{
+            //});
+
+            //modelBuilder.Entity<Cat>(entity =>
+            //{
+            //});
+
+            modelBuilder.Entity<Animal>().ToTable("Animals");
+            modelBuilder.Entity<Pet>().ToTable("Pets");
+            modelBuilder.Entity<Cat>().ToTable("Cats");
         }
     }
 }

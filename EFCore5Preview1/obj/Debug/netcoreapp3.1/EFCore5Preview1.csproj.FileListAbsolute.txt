@@ -15,9 +15,7 @@ D:\Repositories\blog\EFCore5Preview\EFCore5Preview1\bin\Debug\netcoreapp3.1\Micr
 D:\Repositories\blog\EFCore5Preview\EFCore5Preview1\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.SqlServer.dll
 D:\Repositories\blog\EFCore5Preview\EFCore5Preview1\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Abstractions.dll
 D:\Repositories\blog\EFCore5Preview\EFCore5Preview1\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Memory.dll
-D:\Repositories\blog\EFCore5Preview\EFCore5Preview1\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.dll
 D:\Repositories\blog\EFCore5Preview\EFCore5Preview1\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
-D:\Repositories\blog\EFCore5Preview\EFCore5Preview1\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Binder.dll
 D:\Repositories\blog\EFCore5Preview\EFCore5Preview1\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
 D:\Repositories\blog\EFCore5Preview\EFCore5Preview1\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 D:\Repositories\blog\EFCore5Preview\EFCore5Preview1\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.dll
@@ -36,9 +34,6 @@ D:\Repositories\blog\EFCore5Preview\EFCore5Preview1\bin\Debug\netcoreapp3.1\Syst
 D:\Repositories\blog\EFCore5Preview\EFCore5Preview1\bin\Debug\netcoreapp3.1\System.Runtime.Caching.dll
 D:\Repositories\blog\EFCore5Preview\EFCore5Preview1\bin\Debug\netcoreapp3.1\System.Security.Cryptography.ProtectedData.dll
 D:\Repositories\blog\EFCore5Preview\EFCore5Preview1\bin\Debug\netcoreapp3.1\System.Security.Permissions.dll
-D:\Repositories\blog\EFCore5Preview\EFCore5Preview1\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\sni.dll
-D:\Repositories\blog\EFCore5Preview\EFCore5Preview1\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\sni.dll
-D:\Repositories\blog\EFCore5Preview\EFCore5Preview1\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
 D:\Repositories\blog\EFCore5Preview\EFCore5Preview1\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 D:\Repositories\blog\EFCore5Preview\EFCore5Preview1\obj\Debug\netcoreapp3.1\EFCore5Preview1.csproj.CopyComplete
 D:\Repositories\blog\EFCore5Preview\EFCore5Preview1\obj\Debug\netcoreapp3.1\EFCore5Preview1.dll
@@ -58,4 +53,13 @@ D:\Repositories\blog\EFCore5Preview\EFCore5Preview1\bin\Debug\netcoreapp3.1\runt
 D:\Repositories\blog\EFCore5Preview\EFCore5Preview1\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
 D:\Repositories\blog\EFCore5Preview\EFCore5Preview1\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 D:\Repositories\blog\EFCore5Preview\EFCore5Preview1\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+D:\Repositories\blog\EFCore5Preview\EFCore5Preview1\bin\Debug\netcoreapp3.1\Humanizer.dll
+D:\Repositories\blog\EFCore5Preview\EFCore5Preview1\bin\Debug\netcoreapp3.1\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Repositories\blog\EFCore5Preview\EFCore5Preview1\bin\Debug\netcoreapp3.1\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.pdb
+D:\Repositories\blog\EFCore5Preview\EFCore5Preview1\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Repositories\blog\EFCore5Preview\EFCore5Preview1\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.pdb
+D:\Repositories\blog\EFCore5Preview\EFCore5Preview1\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Repositories\blog\EFCore5Preview\EFCore5Preview1\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.pdb
+D:\Repositories\blog\EFCore5Preview\EFCore5Preview1\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Repositories\blog\EFCore5Preview\EFCore5Preview1\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
 d:\Repositories\blog\EFCore5Preview\EFCore5Preview1\obj\Debug\netcoreapp3.1\EFCore5Preview1.csprojAssemblyReference.cache
