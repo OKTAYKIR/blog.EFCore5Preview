@@ -244,29 +244,28 @@ namespace EFCore5Preview1
             #endregion
         }
 
-        public static void EFCore5Preview7()
-        {
-            IServiceCollection services = new ServiceCollection();
+        //public static void EFCore5Preview7()
+        //{
+        //    IServiceCollection services = new ServiceCollection();
 
-            services.AddDbContextFactory<SampleDbContext>(b => b.UseSqlServer(@"Server=127.0.0.1;Initial Catalog=master;User=sa;Password=Pass@word;MultipleActiveResultSets=true"));
+        //    services.AddDbContextFactory<SampleDbContext>(b => b.UseSqlServer(@"Server=127.0.0.1;Initial Catalog=master;User=sa;Password=Pass@word;MultipleActiveResultSets=true"));
 
-            var serviceProvider = services.BuildServiceProvider();
+        //    var serviceProvider = services.BuildServiceProvider();
 
-            var _dbContextFactory = serviceProvider.GetService<IDbContextFactory<SampleDbContext>>();
+        //    var _dbContextFactory = serviceProvider.GetService<IDbContextFactory<SampleDbContext>>();
 
-            using (var context = _dbContextFactory.CreateDbContext())
-            {
-                context.Database.CreateSavepoint("LastSavePoint");
+        //    using (var context = _dbContextFactory.CreateDbContext())
+        //    {
+        //        context.Database.CreateSavepoint("LastSavePoint");
 
-                context.Database.RollbackToSavepoint("LastSavePoint");
+        //        context.Database.RollbackToSavepoint("LastSavePoint");
 
-                context.ChangeTracker.Clear();
-            }
-        }
+        //        context.ChangeTracker.Clear();
+        //    }
+        //}
 
         static void Main(string[] args)
         {
-            EFCore5Preview7();
         }
     }
 }

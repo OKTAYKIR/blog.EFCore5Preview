@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "d:\\Repositories\\blog\\EFCore5Preview\\EFCore5Preview1\\EFCore5Preview1.csproj": {}
+    "D:\\Repositories\\blog\\EFCore5Preview\\EFCore5Preview1\\EFCore5Preview1.csproj": {}
   },
   "projects": {
-    "d:\\Repositories\\blog\\EFCore5Preview\\EFCore5Preview1\\EFCore5Preview1.csproj": {
+    "D:\\Repositories\\blog\\EFCore5Preview\\EFCore5Preview1\\EFCore5Preview1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\Repositories\\blog\\EFCore5Preview\\EFCore5Preview1\\EFCore5Preview1.csproj",
+        "projectUniqueName": "D:\\Repositories\\blog\\EFCore5Preview\\EFCore5Preview1\\EFCore5Preview1.csproj",
         "projectName": "EFCore5Preview1",
-        "projectPath": "d:\\Repositories\\blog\\EFCore5Preview\\EFCore5Preview1\\EFCore5Preview1.csproj",
+        "projectPath": "D:\\Repositories\\blog\\EFCore5Preview\\EFCore5Preview1\\EFCore5Preview1.csproj",
         "packagesPath": "C:\\Users\\Beyaz\\.nuget\\packages\\",
-        "outputPath": "d:\\Repositories\\blog\\EFCore5Preview\\EFCore5Preview1\\obj\\",
+        "outputPath": "D:\\Repositories\\blog\\EFCore5Preview\\EFCore5Preview1\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -43,17 +43,17 @@
           "dependencies": {
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[5.0.0-preview.8.20407.4, )"
+              "version": "[5.0.0-rc.1.20451.13, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[5.0.0-preview.8.20407.4, )"
+              "version": "[5.0.0-rc.1.20451.13, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[5.0.0-preview.8.20407.4, )"
+              "version": "[5.0.0-rc.1.20451.13, )"
             }
           },
           "imports": [
