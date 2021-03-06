@@ -1,3 +1,6 @@
+![Hits](https://hitcounter.pythonanywhere.com/count/tag.svg?url=https://github.com/OKTAYKIR/blog.EFCore5Preview)
+![GitHub issues](https://img.shields.io/github/issues/OKTAYKIR/blog.EFCore5Preview)
+
 # Entity Framework Core 5 - Samples
 EF Core 5 Samples include docker-compose file
 
@@ -36,6 +39,9 @@ dotnet ef migrations add InitialCreate --namespace "EFCore5Preview1.Context" --p
 
 dotnet ef database update --connection "Server=127.0.0.1;Initial Catalog=master;User=sa;Password=Pass@word;" --project d:\Repositories\blog\EFCore5Preview\EFCore5Preview1\EFCore5Preview1.csproj
 ```
+
+## ✨ Contributors
+![GitHub Contributors Image](https://contrib.rocks/image?repo=OKTAYKIR/blog.EFCore5Preview)
 
 ## Show your support
 Please ⭐️ this repository if this project helped you!
